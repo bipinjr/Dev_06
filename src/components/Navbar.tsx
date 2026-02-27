@@ -45,6 +45,7 @@ const Navbar = () => {
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
           <Button variant="ghost" asChild><Link to="/feed">View Reports</Link></Button>
+          <Button variant="ghost" asChild><Link to="/clinics">Pet Clinics</Link></Button>
           {user && (
             <>
               <Button variant="ghost" asChild><Link to="/report">Report Animal</Link></Button>
@@ -79,6 +80,7 @@ const Navbar = () => {
         <div className="border-t bg-card p-4 md:hidden">
           <nav className="flex flex-col gap-2">
             <Button variant="ghost" asChild onClick={() => setMobileOpen(false)}><Link to="/feed">View Reports</Link></Button>
+            <Button variant="ghost" asChild onClick={() => setMobileOpen(false)}><Link to="/clinics">Pet Clinics</Link></Button>
             {user ? (
               <>
                 <Button variant="ghost" asChild onClick={() => setMobileOpen(false)}><Link to="/report">Report Animal</Link></Button>
