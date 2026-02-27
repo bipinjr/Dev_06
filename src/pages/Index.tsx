@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { PawPrint, Heart, Shield, MapPin, Phone, ArrowRight, Users, Stethoscope } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SuccessStories from '@/components/SuccessStories';
 import resqLogo from '@/assets/resq-logo.jpeg';
 import heroRescue from '@/assets/hero-rescue.jpg';
 import animalDog from '@/assets/animal-dog.jpg';
