@@ -133,10 +133,8 @@ const Clinics = () => {
                   <Badge key={s} variant="secondary" className="text-xs">{s}</Badge>
                 ))}
               </div>
-              <Button size="sm" variant="outline" className="mt-2 w-full" asChild>
-                <a href={`https://www.google.com/maps/dir/?api=1&destination=${clinic.latitude},${clinic.longitude}`} target="_blank" rel="noopener noreferrer">
-                  <MapPin className="mr-1 h-4 w-4" />Get Directions
-                </a>
+              <Button size="sm" variant="outline" className="mt-2 w-full" onClick={(e) => { e.stopPropagation(); setSelected(clinic.id); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                <MapPin className="mr-1 h-4 w-4" />Show on Map
               </Button>
             </CardContent>
           </Card>
