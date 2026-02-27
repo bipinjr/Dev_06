@@ -21,6 +21,7 @@ L.Icon.Default.mergeOptions({ iconRetinaUrl: markerIcon2x, iconUrl: markerIcon, 
 const ClinicsMap = ({ clinics, selected, onSelect }: { clinics: Clinic[]; selected: string | null; onSelect: (id: string) => void }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  const markersRef = useRef<Record<string, L.Marker>>({});
 
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
@@ -41,18 +42,34 @@ const ClinicsMap = ({ clinics, selected, onSelect }: { clinics: Clinic[]; select
 
     clinics.forEach(clinic => {
       const marker = L.marker([clinic.latitude, clinic.longitude], { icon: redIcon }).addTo(map);
-      marker.bindPopup(`<strong>${clinic.name}</strong><br/>${clinic.phone}`);
+      marker.bindPopup(`
+        <div style="min-width:180px">
+          <strong>${clinic.name}</strong><br/>
+          <span style="font-size:12px;color:#666">${clinic.address}</span><br/>
+          <span style="font-size:12px">📞 ${clinic.phone}</span><br/>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${clinic.latitude},${clinic.longitude}" 
+             target="_blank" rel="noopener noreferrer"
+             style="display:inline-block;margin-top:6px;padding:4px 10px;background:#0f766e;color:white;border-radius:6px;text-decoration:none;font-size:12px">
+            🧭 Open in Google Maps
+          </a>
+        </div>
+      `);
       marker.on('click', () => onSelect(clinic.id));
+      markersRef.current[clinic.id] = marker;
     });
 
     mapInstance.current = map;
-    return () => { map.remove(); mapInstance.current = null; };
+    return () => { map.remove(); mapInstance.current = null; markersRef.current = {}; };
   }, [clinics]);
 
   useEffect(() => {
     if (!mapInstance.current || !selected) return;
     const clinic = clinics.find(c => c.id === selected);
-    if (clinic) mapInstance.current.setView([clinic.latitude, clinic.longitude], 15);
+    if (clinic) {
+      mapInstance.current.setView([clinic.latitude, clinic.longitude], 16, { animate: true });
+      const marker = markersRef.current[selected];
+      if (marker) marker.openPopup();
+    }
   }, [selected, clinics]);
 
   return <div ref={mapRef} className="h-[400px] w-full rounded-xl" />;
@@ -116,10 +133,8 @@ const Clinics = () => {
                   <Badge key={s} variant="secondary" className="text-xs">{s}</Badge>
                 ))}
               </div>
-              <Button size="sm" variant="outline" className="mt-2 w-full" asChild>
-                <a href={`https://www.google.com/maps/dir/?api=1&destination=${clinic.latitude},${clinic.longitude}`} target="_blank" rel="noopener noreferrer">
-                  <MapPin className="mr-1 h-4 w-4" />Get Directions
-                </a>
+              <Button size="sm" variant="outline" className="mt-2 w-full" onClick={(e) => { e.stopPropagation(); setSelected(clinic.id); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                <MapPin className="mr-1 h-4 w-4" />Show on Map
               </Button>
             </CardContent>
           </Card>
