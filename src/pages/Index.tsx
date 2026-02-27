@@ -201,6 +201,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ====== SUCCESS STORIES ====== */}
+      <SuccessStories />
+
       {/* ====== CTA ====== */}
       <section className="bg-primary py-16">
         <div className="container text-center">

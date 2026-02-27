@@ -45,6 +45,7 @@ const Navbar = () => {
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
           <Button variant="ghost" asChild><Link to="/feed">View Reports</Link></Button>
+          <Button variant="ghost" asChild><Link to="/clinics">Pet Clinics</Link></Button>
           {user && (
             <>
               <Button variant="ghost" asChild><Link to="/report">Report Animal</Link></Button>
