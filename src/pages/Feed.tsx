@@ -4,6 +4,7 @@ import ReportCard from '@/components/ReportCard';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search } from 'lucide-react';
+import { seedReports } from '@/data/seedReports';
 
 const Feed = () => {
   const [reports, setReports] = useState<any[]>([]);
@@ -17,7 +18,16 @@ const Feed = () => {
       let query = supabase.from('rescue_reports').select('*').order('created_at', { ascending: false });
       if (statusFilter !== 'all') query = query.eq('status', statusFilter as any);
       const { data } = await query;
-      setReports(data ?? []);
+
+      // Merge DB reports with seed data if DB is empty
+      const dbReports = data ?? [];
+      if (dbReports.length === 0 && statusFilter === 'all') {
+        setReports(seedReports);
+      } else if (dbReports.length === 0) {
+        setReports(seedReports.filter(r => r.status === statusFilter));
+      } else {
+        setReports(dbReports);
+      }
       setLoading(false);
     };
     fetchReports();
