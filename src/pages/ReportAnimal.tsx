@@ -65,8 +65,8 @@ const ReportAnimal = () => {
       let imageUrls: string[] = [];
 
       if (imageFile) {
-        const fileExt = imageFile.name.split('.').pop();
-        const filePath = `${user.id}/${Date.now()}.${fileExt}`;
+        const safeExt = imageFile.type.split('/')[1] || 'jpg';
+        const filePath = `${user.id}/${Date.now()}.${safeExt}`;
         const { error: uploadError } = await supabase.storage
           .from('report-images')
           .upload(filePath, imageFile);
