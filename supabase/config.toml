@@ -1,9 +1,1 @@
 project_id = "uwcvcyagjatsmzezktgn"
-
-[auth]
-enabled = true
-site_url = "http://localhost:3000"
-
-[auth.email]
-enable_confirmations = false
-enable_signup = true
