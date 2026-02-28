@@ -17,8 +17,8 @@ const UserDashboard = () => {
     if (!user) return;
     const fetchData = async () => {
       const [{ data: reports }, { data: interests }] = await Promise.all([
-        supabase.from('rescue_reports').select('*').eq('reporter_id', user.id).order('created_at', { ascending: false }),
-        supabase.from('adoption_interests').select('*, rescue_reports(*)').eq('user_id', user.id).order('created_at', { ascending: false }),
+        supabase.from('rescue_reports').select('*').eq('reporter_id', user.id).order('created_at', { ascending: false }).limit(50),
+        supabase.from('adoption_interests').select('*, rescue_reports(*)').eq('user_id', user.id).order('created_at', { ascending: false }).limit(50),
       ]);
       setMyReports(reports ?? []);
       setMyInterests(interests ?? []);
