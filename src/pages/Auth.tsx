@@ -30,7 +30,8 @@ const Auth = () => {
         if (!fullName.trim()) { toast.error('Please enter your name'); setLoading(false); return; }
         if (role === 'ngo' && !orgName.trim()) { toast.error('Please enter organization name'); setLoading(false); return; }
         await signUp(email, password, fullName, role, orgName || undefined);
-        toast.success('Account created! Please check your email to verify.');
+        toast.success('Account created! Logging you in...');
+        navigate('/');
       } else {
         await signIn(email, password);
         toast.success('Welcome back!');
