@@ -8,19 +8,14 @@ Main items on the page:
 
 Header / Navbar: Links for RESQ home, View Reports, Pet Clinics, Log In, Sign Up.
 ​
-
 Animal type (title): Shows the reported animal type as “Cat” (tag + heading).
 ​
-
 Status: Shows current case status as “Open”.
 ​
-
 Short description: A brief text field (e.g., “wdwdsd”) that looks like the main report description.
 ​
-
 Condition field: Labeled “Condition:” with text describing animal condition (here “dddhdddddw”).
 ​
-
 Location details block:
 
 Address/free-text location (e.g., “skksskss”)
@@ -31,26 +26,19 @@ Contact phone (“983635363”)
 
 Report time (“about 1 hour ago”)
 ​
-
 Landmark field: Labeled “Landmark:” with extra location hint (e.g., “wswjiw”).
 ​
-
 Map widget: Interactive map (Leaflet + OpenStreetMap) with a marker and zoom controls.
 ​
-
 Footer/dev badge: “Edit with Lovable” badge linking to the Lovable project editor.
 ​
-
 Underlying tools / tech you’re using
 Lovable: No-code/low-code builder powering this app (lovable.app editor link).
 ​
-
 Leaflet: JS map library, providing the map, marker, and zoom UI.
 ​
-
 OpenStreetMap tiles: Map data/tiles shown inside Leaflet.
 ​
-
 If you want to “list things and tools” in your project
 You could document it like this:
 
@@ -58,20 +46,16 @@ Entities/fields in a report:
 
 Animal type, Status, Description, Condition, Address/Location text, City, Contact number, Report timestamp, Landmark, Geo location (for the map).
 ​
-
 User roles this page relates to:
 
 Citizen reporting a case (viewer of the confirmation page).
 
 NGO/volunteer viewing details for rescue assignment (same data, maybe with extra internal fields in another view).
 ​
-
 Core tools/services behind this screen:
 
 Frontend: Lovable-generated React/Next (via lovable.app), Leaflet map component.
 ​
-
-Maps: Leaflet + OpenStreetMap.
-​
+Maps: Leaflet + OpenStreetMap.​
 
 Auth & navigation: Log In / Sign Up routes, reports feed, clinics listing.
