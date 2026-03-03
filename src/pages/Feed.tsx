@@ -15,7 +15,7 @@ const Feed = () => {
   useEffect(() => {
     const fetchReports = async () => {
       setLoading(true);
-      let query = supabase.from('rescue_reports').select('*').order('created_at', { ascending: false }).limit(50);
+      let query = supabase.from('rescue_reports').select('*').order('created_at', { ascending: false });
       if (statusFilter !== 'all') query = query.eq('status', statusFilter as any);
       const { data } = await query;
 

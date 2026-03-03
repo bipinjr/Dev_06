@@ -22,7 +22,7 @@ const NgoDashboard = () => {
   const fetchData = async () => {
     if (!user) return;
     setLoading(true);
-    let query = supabase.from('rescue_reports').select('*').order('created_at', { ascending: false }).limit(50);
+    let query = supabase.from('rescue_reports').select('*').order('created_at', { ascending: false });
     // Show all reports (NGO can claim any open one, plus see their assigned)
     const { data } = await query;
     setReports(data ?? []);
